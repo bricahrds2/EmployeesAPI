@@ -1,150 +1,239 @@
-🌟 Employees API - Spring Boot, Postman & Unit Testing
+Here’s a well-structured and visually appealing `README.md` file for your **Employees API** built with **Spring Boot**, tested with **JUnit**, and tested via **Postman**.
 
-Welcome to the Employees API, a Spring Boot-powered RESTful service that manages employees. This API supports CRUD operations and is tested using JUnit & MockMvc. Postman is used for manual testing and API documentation.
+---
 
-📌 Features
+# 🌟 Employees API 🚀  
+*A Spring Boot REST API for managing employees, tested with JUnit and Postman*
 
-✅ Spring Boot - RESTful API Development✅ CRUD Operations - Create, Read, Update, Delete Employees✅ Postman - API Testing & Collection✅ JUnit & MockMvc - Unit & Integration Testing✅ JSON Responses - Clean and structured data format✅ Spring Data JPA - Database Integration
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.7.5-green?style=for-the-badge&logo=spring-boot)
+![JUnit](https://img.shields.io/badge/JUnit-5.8.2-blue?style=for-the-badge&logo=java)
+![Postman](https://img.shields.io/badge/Tested%20With-Postman-orange?style=for-the-badge&logo=postman)
 
-📦 Project Structure
+---
 
-📂 employees-api/
-├── 📂 src/main/java/com/example/restservice/
-│   ├── 📂 controller/    # REST Controllers
-│   ├── 📂 service/       # Business Logic
-│   ├── 📂 repository/    # Data Access Layer
-│   ├── 📂 model/         # Entity Classes
-│   ├── 📂 exceptions/    # Custom Exceptions
-├── 📂 src/test/java/com/example/restservice/  # Unit Tests
-├── 📄 pom.xml           # Maven Dependencies
-└── 📄 README.md         # API Documentation
+## 📌 Features  
+✅ Create, Read, Update, and Delete (CRUD) Employee Records  
+✅ REST API with JSON Requests & Responses  
+✅ **Unit Testing** using **JUnit & Mockito**  
+✅ **Integration Testing** using **MockMvc**  
+✅ Tested via **Postman**  
 
-🚀 Getting Started
+---
 
-🔧 Prerequisites
+## 📁 Project Structure  
 
-Java 17+
+```
+employees-api/
+│── src/main/java/com/example/restservice
+│   ├── api/
+│   │   ├── EmployeesController.java  # REST Controller
+│   │   ├── Employees.java            # Employees Model
+│   │   ├── Employee.java             # Employee Entity
+│   │   ├── EmployeesDAO.java         # Data Access Layer
+│   ├── services/
+│   │   ├── EmployeesService.java     # Business Logic Layer
+│   ├── EmployeesApiApplication.java  # Main Spring Boot Application
+│
+│── src/test/java/com/example/restservice
+│   ├── ControllerTest.java           # JUnit & Mockito Tests
+│
+│── postman/                          # Postman Collection
+│── README.md                         # Documentation
+│── pom.xml                            # Dependencies (Maven)
+```
 
-Spring Boot 3.x
+---
 
-Maven
+## 🔧 Installation  
 
-Postman
-
-H2 Database (In-Memory) / MySQL
-
-🔨 Installation & Setup
-
-1️⃣ Clone the repository
-
-git clone https://github.com/your-username/employees-api.git
+### **1️⃣ Clone the Repository**  
+```bash
+git clone https://github.com/yourusername/employees-api.git
 cd employees-api
+```
 
-2️⃣ Build & Run the Project
+### **2️⃣ Install Dependencies**  
+Ensure you have **Java 17+** and **Maven** installed.  
+```bash
+mvn clean install
+```
 
+### **3️⃣ Run the Application**  
+```bash
 mvn spring-boot:run
+```
 
-3️⃣ Access the API
+---
 
-Open Postman and import employees-api.postman_collection.json
+## 🛠️ API Endpoints  
 
-Base URL: http://localhost:8080/employees
-
-🔥 API Endpoints
-
-📍 Employee CRUD Operations
-
-Method
-
-Endpoint
-
-Description
-
-GET
-
-/employees
-
-Get all employees
-
-GET
-
-/employees/{id}
-
-Get an employee by ID
-
-POST
-
-/employees
-
-Add a new employee
-
-PUT
-
-/employees/{id}
-
-Update an existing employee
-
-DELETE
-
-/employees/{id}
-
-Remove an employee
-
-Example POST Request (Add Employee):
-
+### 📌 **Get All Employees**  
+**Request:**  
+```http
+GET /employees
+```
+✅ **Response (200 OK)**  
+```json
 {
+  "employeeList": [
+    {
+      "id": 1,
+      "fname": "John",
+      "lname": "Doe",
+      "title": "Manager",
+      "email": "johndoe@example.com"
+    },
+    {
+      "id": 2,
+      "fname": "Jane",
+      "lname": "Smith",
+      "title": "CEO",
+      "email": "janesmith@example.com"
+    }
+  ]
+}
+```
+
+---
+
+### 📌 **Get Employee by ID**  
+**Request:**  
+```http
+GET /employees/1
+```
+✅ **Response (200 OK)**  
+```json
+{
+  "id": 1,
   "fname": "John",
   "lname": "Doe",
-  "title": "Software Engineer",
-  "email": "john.doe@example.com"
+  "title": "Manager",
+  "email": "johndoe@example.com"
 }
-
-🛠️ Unit Testing (JUnit + MockMvc)
-
-📝 Sample Test Case
-
-@SpringBootTest
-@AutoConfigureMockMvc
-public class EmployeeControllerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
-    private EmployeeService employeeService;
-
-    @Test
-    public void testGetAllEmployees() throws Exception {
-        List<Employee> employees = List.of(new Employee(1, "Alice", "Smith", "Manager", "alice@example.com"));
-        when(employeeService.getAllEmployees()).thenReturn(employees);
-
-        mockMvc.perform(get("/employees").contentType(MediaType.APPLICATION_JSON))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$.size()").value(1))
-            .andExpect(jsonPath("$[0].fname").value("Alice"));
-    }
+```
+❌ **Response (404 Not Found)**
+```json
+{
+  "error": "Employee not found"
 }
+```
 
-✅ Run Tests:
+---
 
+### 📌 **Add a New Employee**  
+**Request:**  
+```http
+POST /employees
+Content-Type: application/json
+```
+**Body:**  
+```json
+{
+  "fname": "Kevin",
+  "lname": "Cruyff",
+  "title": "CTO",
+  "email": "kevin.cruyff@example.com"
+}
+```
+✅ **Response (201 Created)**  
+```json
+{
+  "id": 3,
+  "fname": "Kevin",
+  "lname": "Cruyff",
+  "title": "CTO",
+  "email": "kevin.cruyff@example.com"
+}
+```
+
+---
+
+### 📌 **Update an Employee**  
+**Request:**  
+```http
+PUT /employees/3
+Content-Type: application/json
+```
+**Body:**  
+```json
+{
+  "fname": "Kevin",
+  "lname": "Cruyff",
+  "title": "COO",
+  "email": "kevin.cruyff@example.com"
+}
+```
+✅ **Response (200 OK)**  
+```json
+{
+  "id": 3,
+  "fname": "Kevin",
+  "lname": "Cruyff",
+  "title": "COO",
+  "email": "kevin.cruyff@example.com"
+}
+```
+
+---
+
+### 📌 **Delete an Employee**  
+**Request:**  
+```http
+DELETE /employees/3
+```
+✅ **Response (204 No Content)**  
+```json
+{}
+```
+
+---
+
+## 🧪 Running Tests  
+
+### **1️⃣ Run All Tests**  
+```bash
 mvn test
+```
 
-📬 Postman Collection
+### **2️⃣ Controller Unit Test (JUnit & Mockito)**  
+```java
+@Test
+public void getAllEmployeesTest() throws Exception {
+    when(employeesDAO.getAllEmployees()).thenReturn(mockEmployees);
 
-📥 Download Postman Collection: employees-api.postman_collection.json
+    mockMvc.perform(get("/employees")
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.employeeList.length()").value(mockEmployeeList.size()));
+}
+```
 
-1️⃣ Import into Postman → File → Import → Select JSON2️⃣ Set Environment → BASE_URL = http://localhost:8080/employees3️⃣ Run API Requests
+---
 
-🎯 Future Enhancements
+## 📬 Postman Collection  
+📥 **[Download Postman Collection](postman/employees_api.postman_collection.json)**  
+💡 Import the JSON file into **Postman** and test all endpoints easily!
 
-🔹 Add JWT Authentication & Security🔹 Implement Docker & Kubernetes🔹 CI/CD Integration (GitHub Actions)
+---
 
-🏆 Contributors
+## 🛠️ Technologies Used  
+- **Spring Boot** (REST API)  
+- **Maven** (Build Tool)  
+- **JUnit 5** & **Mockito** (Unit Testing)  
+- **MockMvc** (Integration Testing)  
+- **Postman** (API Testing)  
+- **Lombok** (Simplify POJOs)  
 
-👤 Your Name - GitHub
+---
 
-📧 Have questions? Contact us at support@yourapi.com
+## 🏆 Contributors  
+👤 **[Your Name]** – [GitHub Profile](https://github.com/yourusername)  
 
-⭐ Show Some Love!
+---
 
-If you found this project useful, please star ⭐ the repository to show support! 😊
+## 📜 License  
+This project is licensed under the **MIT License**.
+
+---
+
+### 🚀 *Happy Coding! Build and Test Your API with Confidence!* 🎯
