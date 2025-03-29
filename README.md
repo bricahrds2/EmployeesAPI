@@ -1,7 +1,3 @@
-Here’s a well-structured and visually appealing `README.md` file for your **Employees API** built with **Spring Boot**, tested with **JUnit**, and tested via **Postman**.
-
----
-
 # 🌟 Employees API 🚀  
 *A Spring Boot REST API for managing employees, tested with JUnit and Postman*
 
@@ -148,46 +144,6 @@ Content-Type: application/json
 
 ---
 
-### 📌 **Update an Employee**  
-**Request:**  
-```http
-PUT /employees/3
-Content-Type: application/json
-```
-**Body:**  
-```json
-{
-  "fname": "Kevin",
-  "lname": "Cruyff",
-  "title": "COO",
-  "email": "kevin.cruyff@example.com"
-}
-```
-✅ **Response (200 OK)**  
-```json
-{
-  "id": 3,
-  "fname": "Kevin",
-  "lname": "Cruyff",
-  "title": "COO",
-  "email": "kevin.cruyff@example.com"
-}
-```
-
----
-
-### 📌 **Delete an Employee**  
-**Request:**  
-```http
-DELETE /employees/3
-```
-✅ **Response (204 No Content)**  
-```json
-{}
-```
-
----
-
 ## 🧪 Running Tests  
 
 ### **1️⃣ Run All Tests**  
@@ -227,12 +183,7 @@ public void getAllEmployeesTest() throws Exception {
 ---
 
 ## 🏆 Contributors  
-👤 **[Your Name]** – [GitHub Profile](https://github.com/yourusername)  
-
----
-
-## 📜 License  
-This project is licensed under the **MIT License**.
+👤 **[Brandon Richards]** – [GitHub Profile](https://github.com/bricahrds2)  
 
 ---
 
